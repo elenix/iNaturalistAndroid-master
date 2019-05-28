@@ -631,13 +631,13 @@
     <string name="all_guides_all_caps">ALL</string>
     <string name="description_all_caps">DESCRIPTION</string>
     <string name="quantity_all_caps">QTY</string>
-    <string name="observation_count_all_caps">%1$s OBSERVATIONS</string>
-    <string name="observation_count_single_all_caps">%1$d OBSERVATION</string>
+    <string name="observation_count_all_caps">%1$s OCCURRENCES</string>
+    <string name="observation_count_single_all_caps">%1$d OCCURRENCES</string>
     <string name="agree_all_caps">AGREE</string>
-    <string name="observations_all_caps">OBSERVATIONS</string>
+    <string name="observations_all_caps">OCCURRENCES</string>
     <string name="species_all_caps">SPECIES</string>
     <string name="people_all_caps">PEOPLE</string>
-    <string name="identifiers_all_caps">IDENTIFIERS</string>
+    <string name="identifiers_all_caps">RESEARCHERS</string>
     <string name="identifications_all_caps">IDENTIFICATIONS</string>
     <string name="news_all_caps">NEWS</string>
     <string name="got_it_all_caps">GOT IT!</string>
