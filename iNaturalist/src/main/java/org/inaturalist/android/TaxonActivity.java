@@ -132,6 +132,8 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private ViewGroup mTaxonButtons;
     private ViewGroup mSelectTaxon;
     private ViewGroup mCompareTaxon;
+    private ViewGroup mBtnGoogleScholar;
+    private ViewGroup mBtnBHL;
     private ListView mTaxonomyList;
     private ImageView mTaxonicIcon;
     private ViewGroup mTaxonInactive;
@@ -711,10 +713,48 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mTaxonButtons = (ViewGroup) findViewById(R.id.taxon_buttons);
         mSelectTaxon = (ViewGroup) findViewById(R.id.select_taxon);
         mCompareTaxon = (ViewGroup) findViewById(R.id.compare_taxon);
+        mBtnGoogleScholar = (ViewGroup) findViewById(R.id.btn_google_scholar);
+        mBtnBHL = (ViewGroup) findViewById(R.id.btn_biodiversity_heritage_lib);
         mTaxonicIcon = (ImageView) findViewById(R.id.taxon_iconic_taxon);
         mTaxonInactive = (ViewGroup) findViewById(R.id.taxon_inactive);
 
         mTaxonButtons.setVisibility(mTaxonSuggestion != TAXON_SUGGESTION_NONE ? View.VISIBLE : View.GONE);
+
+        /* Set the button listener for reference button - Google Scholar. */
+        mBtnGoogleScholar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /* Get the local device language. */
+                Locale deviceLocale = getResources().getConfiguration().locale;
+                String deviceLanguage =   deviceLocale.getLanguage();
+
+                /* Get the species' scientific name. */
+                String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+                taxonScientificName = taxonScientificName.replace(" ", "+");
+
+                /* Set the reference link. */
+                String referenceUrl = String.format("https://scholar.google.com/scholar?hl=%s&q=%s", deviceLanguage, taxonScientificName);
+
+                /* Open the website using default browser of the phone. */
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(referenceUrl));
+                startActivity(i);
+            }
+        });
+
+        /* Set the button listener for reference button - Biodiversity Heritage Library. */
+        mBtnBHL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+                taxonScientificName = taxonScientificName.replace(" ", "+");
+                String referenceUrl = String.format("https://www.biodiversitylibrary.org/search?searchTerm=%s&stype=F#/titles", taxonScientificName);
+
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(referenceUrl));
+                startActivity(i);
+            }
+        });
 
         mSelectTaxon.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -665,6 +665,8 @@
     <string name="seasonality">Seasonality</string>
     <string name="DNA_information">DNA information</string>
     <string name="DNA_related_link">Related link</string>
+    <string name="reference_google_scholar">Google Scholar</string>
+    <string name="reference_biodiversity_heritage_lib">BHL</string>
     <string name="verifiable">Verifiable</string>
     <string name="no_annotation">No Annotation</string>
     <string name="donate_to_inaturalist">Donate to iNaturalist</string>

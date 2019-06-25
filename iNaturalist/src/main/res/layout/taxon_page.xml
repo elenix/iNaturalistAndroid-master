@@ -347,6 +347,73 @@
                 android:layout_marginLeft="16dp"
                 />
 
+            <LinearLayout
+                android:id="@+id/reference_buttons"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:padding="15dp"
+                android:background="#EEEEEE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/btn_google_scholar"
+                    android:background="@drawable/circular_button_green"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:lines="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:clickable="true"
+                    android:layout_marginRight="10dp"
+                    >
+                    <!--<ImageView-->
+                        <!--android:layout_width="24dp"-->
+                        <!--android:layout_height="24dp"-->
+                        <!--android:src="@drawable/ic_compare"-->
+                        <!--android:tint="#ffffff"-->
+                        <!--/>-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reference_google_scholar"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:paddingLeft="7dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_biodiversity_heritage_lib"
+                    android:background="@drawable/circular_button_green"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:lines="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:clickable="true"
+                    android:layout_marginLeft="10dp"
+                    >
+                    <!--<ImageView-->
+                        <!--android:layout_width="24dp"-->
+                        <!--android:layout_height="24dp"-->
+                        <!--android:src="@drawable/ic_check_circle_black_24dp"-->
+                        <!--android:tint="#ffffff"-->
+                        <!--/>-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reference_biodiversity_heritage_lib"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:paddingLeft="7dp"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
