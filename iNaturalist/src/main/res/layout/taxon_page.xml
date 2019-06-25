@@ -326,13 +326,26 @@
                     android:layout_marginTop="50dp"
                     />
 
-                <uk.co.senab.photoview.HackyViewPager
-                    android:id="@+id/DNA_photos"
-                    android:layout_width="fill_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_height="250dp" />
+                <!--<uk.co.senab.photoview.HackyViewPager-->
+                    <!--android:id="@+id/DNA_photos"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_height="250dp" />-->
 
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/relatedLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#8A000000"
+                android:text="@string/DNA_related_link"
+                android:linksClickable="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
