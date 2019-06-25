@@ -155,73 +155,70 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#ffffff"
             android:orientation="vertical"
             android:paddingLeft="21dp"
             android:paddingRight="21dp"
-            android:paddingBottom="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:paddingBottom="25dp">
 
             <TextView
                 android:id="@+id/taxon_name"
-                android:text="Vivid Dancer"
-                android:textSize="22sp"
-                android:textColor="#000000"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Vivid Dancer"
+                android:textColor="#000000"
                 android:textIsSelectable="true"
-                />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/taxon_scientific_name"
-                android:text="Argia Vivida"
-                android:textSize="16sp"
-                android:textColor="#757575"
-                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Argia Vivida"
+                android:textColor="#757575"
                 android:textIsSelectable="true"
-                />
+                android:textSize="16sp" />
 
 
             <LinearLayout
                 android:id="@+id/taxon_inactive"
-                android:visibility="gone"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_error_black_24dp"
-                    android:tint="#C32417"
                     android:layout_marginRight="5dp"
-                    />
+                    android:src="@drawable/ic_error_black_24dp"
+                    android:tint="#C32417" />
+
                 <TextView
-                    android:text="@string/inactive_taxon"
-                    android:textSize="16sp"
-                    android:textColor="#C32417"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/inactive_taxon"
+                    android:textColor="#C32417"
                     android:textIsSelectable="false"
-                    />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/wikipedia_summary"
-                android:text="I am the very model of a modern major general / I've information animal, mineral, and vegetable / I know the kings of England and I quote the fights historical / From Marathon to Waterloo in order categorical."
-                android:textSize="16sp"
-                android:textColor="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:textIsSelectable="true"
                 android:lineSpacingMultiplier="1.2"
-                />
+                android:text="I am the very model of a modern major general / I've information animal, mineral, and vegetable / I know the kings of England and I quote the fights historical / From Marathon to Waterloo in order categorical."
+                android:textColor="#000000"
+                android:textIsSelectable="true"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -301,6 +298,54 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#8A000000"
+                android:text="@string/DNA_information"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="16dp"
+                />
+
+            <RelativeLayout
+                android:id="@+id/DNA_information_container"
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+                <ProgressBar
+                    android:id="@+id/loading_DNA"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:padding="30dp"
+                    android:visibility="visible"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    />
+
+                <!--<uk.co.senab.photoview.HackyViewPager-->
+                    <!--android:id="@+id/DNA_photos"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_height="250dp" />-->
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/relatedLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#8A000000"
+                android:text="@string/DNA_related_link"
+                android:linksClickable="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
