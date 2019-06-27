@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="inatapptheme_color_disabled">#33669900</color>
-    <color name="inatapptheme_color">#669900</color>
-    <color name="inatapptheme_color_highlighted">#ff006616</color>
-    <color name="inatapptheme_color_highlighted_grid_items">#E2EAD1</color>
+    <color name="inatapptheme_color_disabled">#335c1a2f</color>
+    <color name="inatapptheme_color">#5c1a2f</color>
+    <color name="inatapptheme_color_highlighted">#ffa10033</color>
+    <color name="inatapptheme_color_highlighted_grid_items">#fcdee6</color>
     <color name="inatapptheme_color_gray">#F5F5F5</color>
-    <color name="inatapptheme_color_unviewed_update">#E1E9D0</color>
-    <color name="inatapptheme_color_highlighted_update">#A4BE67</color>
+    <color name="inatapptheme_color_unviewed_update">#e3cad1</color>
+    <color name="inatapptheme_color_highlighted_update">#cc1f56</color>
     <color name="inatapptheme_color_error">#F3D3DA</color>
-    <color name="inatapptheme_color_error_highlighted">#ff474b</color>
-    <color name="inatapptheme_color_being_uploaded">#E3EDCD</color>
+    <color name="inatapptheme_color_error_highlighted">#f0134a</color>
+    <color name="inatapptheme_color_being_uploaded">#ebcad3</color>
 </resources>

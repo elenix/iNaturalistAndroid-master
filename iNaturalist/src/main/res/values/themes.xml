@@ -20,7 +20,7 @@
     -->
 
     <style name="iNatAppTextAppearanceSwitch" parent="android:TextAppearance.Small">
-        <item name="android:textColor">#ff3c3f41</item>
+        <item name="android:textColor">#ff4d4446</item>
     </style>
 
     <style name="PreferenceThemeOverlay">
@@ -46,7 +46,7 @@
 
         <item name="android:editTextStyle">@style/EditTextiNatAppTheme</item>
 
-        <item name="android:textColorHighlight">#99669900</item>
+        <item name="android:textColorHighlight">#99940027</item>
 
         <item name="android:checkboxStyle">@style/CheckBoxiNatAppTheme</item>
 

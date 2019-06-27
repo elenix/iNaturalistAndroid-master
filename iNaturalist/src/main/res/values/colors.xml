@@ -6,11 +6,11 @@
     <color name="actionbar_background_item_pressed_start">#FF7F00</color>
     <color name="actionbar_background_item_pressed_end">#EE7600</color>
     <color name="actionbar_btn_pressed">#ff8e8e8e</color>
-    <color name="side_menu_header_bg">#666666</color>
+    <color name="side_menu_header_bg">#5c001e</color>
     <color name="side_menu_header_bg_pressed">#ff3e3e3e</color>
-    <color name="side_menu_item_bg_current">#5c001e</color>
-    <color name="side_menu_add_obs_item_bg">#eff6e2</color>
-    <color name="side_menu_add_obs_item_bg_pressed">#33669900</color>
+    <color name="side_menu_item_bg_current">#ffd6e3</color>
+    <color name="side_menu_add_obs_item_bg">#ffe0e7</color>
+    <color name="side_menu_add_obs_item_bg_pressed">#33940027</color>
 
     <color name="conservation_near_threatened_text">#a63737</color>
     <color name="conservation_near_threatened_bg">#19a63737</color>

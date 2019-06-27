@@ -560,7 +560,7 @@
     <string name="password_changed">La contrasenya l\'app ja no és correcta- va canviar la contrasenya en el lloc web? Si us plau introdueixi la nova aquí</string>
     <string name="just_so_you_know">Perquè sapigueu...</string>
     <string name="ask_for_g_plus_permissions">Per accedir als vostres contactes, Google ens demana requerir el vostre permís per utilitzar el vostre compte de Google, tot i no tenir accés als contactes per qualsevol altre motiu. Si rebutgeu aquest permís, necessitarà inscriure\'s o connectar amb un nom d\'usuari i contrasenya.</string>
-    <string name="new_to_inat_sign_up_now"><![CDATA[Nou a %1$s? <b>Registreu-vos ara!</b>]]></string>
+    <string name="new_to_inat_sign_up_now"><![CDATA[Nou a myDNAmark? <b>Registreu-vos ara!</b>]]></string>
     <string name="see_more_observations">Veure més observacions</string>
     <string name="see_more_species">Veure més espècies</string>
     <string name="see_more_identifications">Veure més identificacions</string>

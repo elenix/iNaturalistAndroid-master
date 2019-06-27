@@ -560,7 +560,7 @@
     <string name="password_changed">Das von der App verwendete Passwort funktioniert nicht mehr. Haben Sie Ihr Passwort auf der Website geändert? Bitte geben Sie hier das Neue ein</string>
     <string name="just_so_you_know">Nur damit Sie es wissen …</string>
     <string name="ask_for_g_plus_permissions">Google verlangt, dass wir um Erlaubnis bitten, auf Ihre Kontakte zuzugreifen, um Ihr Google-Konto nutzen zu können, auch wenn wir niemals auf Ihre Kontakte zugreifen. Wenn Sie diese Erlaubnis verweigern, müssen Sie sich mit einem Benutzernamen und Passwort anmelden.</string>
-    <string name="new_to_inat_sign_up_now"><![CDATA[Neu bei %1$s? <b>Jetzt anmelden!</b>]]></string>
+    <string name="new_to_inat_sign_up_now"><![CDATA[Neu bei myDNAmark? <b>Jetzt anmelden!</b>]]></string>
     <string name="see_more_observations">Weitere Beobachtungen anzeigen</string>
     <string name="see_more_species">Weitere Arten anzeigen</string>
     <string name="see_more_identifications">Weitere Identifikationen anzeigen</string>

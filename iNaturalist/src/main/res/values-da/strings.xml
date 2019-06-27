@@ -560,7 +560,7 @@
     <string name="password_changed">Adgangskoden, som app\'en benytter, fungerer ikke længere - du har muligvis ændret den på webstedet. Angiv den nye adgangskode her</string>
     <string name="just_so_you_know">Blot så du ved det...</string>
     <string name="ask_for_g_plus_permissions">For at kunne benytte din Google-konto, kræver Google, at vi anmoder om tilladelse til at tilgå dine kontaktpersoner, selvom vi under ingen omstændigheder tilgår dine kontakter. Nægter du denne tilladelse, vil du skulle tilmelde dig eller logge ind med brugernavn og adgangskode.</string>
-    <string name="new_to_inat_sign_up_now"><![CDATA[Ny her hos %1$s? <b>Tilmeld dig nu!</b>]]></string>
+    <string name="new_to_inat_sign_up_now"><![CDATA[Ny her hos myDNAmark? <b>Tilmeld dig nu!</b>]]></string>
     <string name="see_more_observations">Se flere observationer</string>
     <string name="see_more_species">Se flere arter</string>
     <string name="see_more_identifications">Se flere identifikationer</string>
