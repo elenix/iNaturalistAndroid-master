@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -14,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -90,7 +92,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private static String TAG = "TaxonActivity";
 
     // The various colors we can use for the lines
-    private static final String[] ATTRIBUTE_LINE_COLORS = { "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf" };
+    private static final String[] ATTRIBUTE_LINE_COLORS = {"#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"};
 
     private static final int TAXON_SEARCH_REQUEST_CODE = 302;
 
@@ -108,11 +110,14 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
     private INaturalistApp mApp;
     private ActivityHelper mHelper;
-	@State(AndroidStateBundlers.BetterJSONObjectBundler.class) public BetterJSONObject mTaxon;
+    @State(AndroidStateBundlers.BetterJSONObjectBundler.class)
+    public BetterJSONObject mTaxon;
     private TaxonBoundsReceiver mTaxonBoundsReceiver;
     private TaxonReceiver mTaxonReceiver;
-    @State public boolean mDownloadTaxon;
-    @State(AndroidStateBundlers.BetterJSONObjectBundler.class) public BetterJSONObject mObservation;
+    @State
+    public boolean mDownloadTaxon;
+    @State(AndroidStateBundlers.BetterJSONObjectBundler.class)
+    public BetterJSONObject mObservation;
 
     private ViewGroup mPhotosContainer;
     private ViewGroup mNoPhotosContainer;
@@ -134,6 +139,11 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private ViewGroup mCompareTaxon;
     private ViewGroup mBtnGoogleScholar;
     private ViewGroup mBtnBHL;
+    private ViewGroup mBtnZipcodeZoo;
+    private ViewGroup mBtnWikipedia;
+    private ViewGroup mBtnIUCN;
+    private ViewGroup mBtnGbif;
+    private ViewGroup mBtnNcbi;
     private ListView mTaxonomyList;
     private ImageView mTaxonicIcon;
     private ViewGroup mTaxonInactive;
@@ -142,27 +152,28 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private ProgressBar mLoadingSeasonability;
     private ProgressBar mLoadingHistogram;
 
-    @State public boolean mMapBoundsSet = false;
-    @State public int mTaxonSuggestion = TAXON_SUGGESTION_NONE;
-    @State public boolean mIsTaxonomyListExpanded = false;
+    @State
+    public boolean mMapBoundsSet = false;
+    @State
+    public int mTaxonSuggestion = TAXON_SUGGESTION_NONE;
+    @State
+    public boolean mIsTaxonomyListExpanded = false;
     private HistogramReceiver mHistogramReceiver;
-    
+
     private List<Integer> mHistogram = null;
     private List<Integer> mResearchGradeHistogram = null;
-    private TreeMap<String,Map<String,List<Integer>>> mPopularFieldsByAttributes = null;
+    private TreeMap<String, Map<String, List<Integer>>> mPopularFieldsByAttributes = null;
     private ArrayList<LineChart> mSeasonabilityGraph;
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
         FlurryAgent.onStartSession(this, INaturalistApp.getAppContext().getString(R.string.flurry_api_key));
         FlurryAgent.logEvent(this.getClass().getSimpleName());
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
         FlurryAgent.onEndSession(this);
     }
@@ -174,7 +185,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
             results = (BetterJSONObject) intent.getSerializableExtra(intent.getAction());
 
-           Log.d(TAG, "HistogramReceiver - " + intent.getAction());
+            Log.d(TAG, "HistogramReceiver - " + intent.getAction());
 
             if (results == null) {
                 return;
@@ -281,7 +292,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mSeasonabilityViewPager.setVisibility(View.VISIBLE);
 
         if (mSeasonabilityViewPager.getAdapter() == null) {
-            mSeasonabilityGraph = new ArrayList<LineChart>(Collections.nCopies(mPopularFieldsByAttributes.size() + 1, (LineChart)null));
+            mSeasonabilityGraph = new ArrayList<LineChart>(Collections.nCopies(mPopularFieldsByAttributes.size() + 1, (LineChart) null));
 
             SeasonabilityPagerAdapter adapter = new SeasonabilityPagerAdapter(this);
             mSeasonabilityViewPager.setAdapter(adapter);
@@ -546,6 +557,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         public void destroyItem(ViewGroup collection, int position, Object view) {
             collection.removeView((View) view);
         }
+
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
@@ -636,9 +648,9 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mHelper = new ActivityHelper(this);
 
         Intent intent = getIntent();
-        
+
         if (savedInstanceState == null) {
-        	mTaxon = (BetterJSONObject) intent.getSerializableExtra(TAXON);
+            mTaxon = (BetterJSONObject) intent.getSerializableExtra(TAXON);
             mObservation = (BetterJSONObject) intent.getSerializableExtra(OBSERVATION);
             mDownloadTaxon = intent.getBooleanExtra(DOWNLOAD_TAXON, false);
             mTaxonSuggestion = intent.getIntExtra(TAXON_SUGGESTION, TAXON_SUGGESTION_NONE);
@@ -688,6 +700,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
                     }
                 };
 
+
                 TileOverlay tileOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(tileProvider));
 
                 mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -713,8 +726,16 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mTaxonButtons = (ViewGroup) findViewById(R.id.taxon_buttons);
         mSelectTaxon = (ViewGroup) findViewById(R.id.select_taxon);
         mCompareTaxon = (ViewGroup) findViewById(R.id.compare_taxon);
+
+        //Related link button
         mBtnGoogleScholar = (ViewGroup) findViewById(R.id.btn_google_scholar);
         mBtnBHL = (ViewGroup) findViewById(R.id.btn_biodiversity_heritage_lib);
+        mBtnZipcodeZoo = (ViewGroup) findViewById(R.id.btn_zipcode_zoo);
+        mBtnWikipedia = (ViewGroup) findViewById(R.id.btn_wikipedia);
+        mBtnIUCN = (ViewGroup) findViewById(R.id.btn_international_union_conservation_nature);
+        mBtnGbif = (ViewGroup) findViewById(R.id.btn_global_biodiversity_information_facility);
+        mBtnNcbi = (ViewGroup) findViewById(R.id.btn_national_center_biotechnology_information);
+
         mTaxonicIcon = (ImageView) findViewById(R.id.taxon_iconic_taxon);
         mTaxonInactive = (ViewGroup) findViewById(R.id.taxon_inactive);
 
@@ -749,6 +770,74 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
                 String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
                 taxonScientificName = taxonScientificName.replace(" ", "+");
                 String referenceUrl = String.format("https://www.biodiversitylibrary.org/search?searchTerm=%s&stype=F#/titles", taxonScientificName);
+
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(referenceUrl));
+                startActivity(i);
+            }
+        });
+
+        /* Set the button listener for reference button - ZipcodeZoo. */
+        mBtnZipcodeZoo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+                taxonScientificName = taxonScientificName.replace(" ", "+");
+                String referenceUrl = String.format("https://zipcodezoo.com/?s=%s", taxonScientificName);
+
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(referenceUrl));
+                startActivity(i);
+            }
+        });
+
+        /* Set the button listener for reference button - Wikipedia. */
+        mBtnWikipedia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+                String referenceUrl = String.format("https://en.wikipedia.org/wiki/%s", taxonScientificName);
+
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(referenceUrl));
+                startActivity(i);
+            }
+        });
+
+        /* Set the button listener for reference button - SCIRUS. */
+        mBtnIUCN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+                taxonScientificName = taxonScientificName.replace(" ", "+");
+                String referenceUrl = String.format("https://www.iucnredlist.org/search?query=%s&searchType=species", taxonScientificName);
+
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(referenceUrl));
+                startActivity(i);
+            }
+        });
+
+        /* Set the button listener for reference button - GBIF. */
+        mBtnGbif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+                String referenceUrl = String.format("https://www.gbif.org/en/search?q=%s", taxonScientificName);
+
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(referenceUrl));
+                startActivity(i);
+            }
+        });
+
+        /* Set the button listener for reference button - NCBI. */
+        mBtnNcbi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+                taxonScientificName = taxonScientificName.replace(" ", "+");
+                String referenceUrl = String.format("https://www.ncbi.nlm.nih.gov/search/all/?term=%s", taxonScientificName);
 
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(referenceUrl));

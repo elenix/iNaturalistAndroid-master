@@ -356,60 +356,174 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                    <LinearLayout
+                        android:id="@+id/btn_google_scholar"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/circular_button_white_with_border"
+                        android:clickable="true"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:lines="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/google_scholar_logo" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_international_union_conservation_nature"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/circular_button_white_with_border"
+                        android:clickable="true"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:lines="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/international_union_conservation_nature_logo" />
+                    </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:padding="15dp"
+                android:background="#EEEEEE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <LinearLayout
-                    android:id="@+id/btn_google_scholar"
-                    android:background="@drawable/circular_button_green"
+                    android:id="@+id/btn_zipcode_zoo"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="48dp"
-                    android:lines="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:clickable="true"
                     android:layout_marginRight="10dp"
-                    >
-                    <!--<ImageView-->
-                        <!--android:layout_width="24dp"-->
-                        <!--android:layout_height="24dp"-->
-                        <!--android:src="@drawable/ic_compare"-->
-                        <!--android:tint="#ffffff"-->
-                        <!--/>-->
-                    <TextView
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button_white_with_border"
+                    android:clickable="true"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:lines="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/reference_google_scholar"
-                        android:textSize="18sp"
-                        android:textColor="#ffffff"
-                        android:paddingLeft="7dp"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/zipcodezoo_logo" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_biodiversity_heritage_lib"
-                    android:background="@drawable/circular_button_green"
+                    android:id="@+id/btn_wikipedia"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="48dp"
-                    android:lines="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:clickable="true"
                     android:layout_marginLeft="10dp"
-                    >
-                    <!--<ImageView-->
-                        <!--android:layout_width="24dp"-->
-                        <!--android:layout_height="24dp"-->
-                        <!--android:src="@drawable/ic_check_circle_black_24dp"-->
-                        <!--android:tint="#ffffff"-->
-                        <!--/>-->
-                    <TextView
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button_white_with_border"
+                    android:clickable="true"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:lines="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/reference_biodiversity_heritage_lib"
-                        android:textSize="18sp"
-                        android:textColor="#ffffff"
-                        android:paddingLeft="7dp"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/wikipedia_logo" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:padding="15dp"
+                android:background="#EEEEEE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/btn_global_biodiversity_information_facility"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button_white_with_border"
+                    android:clickable="true"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:lines="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/global_biodiversity_information_facility_logo" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_national_center_biotechnology_information"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button_white_with_border"
+                    android:clickable="true"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:lines="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/national_center_biotechnology_information_logo" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:padding="15dp"
+                android:background="#EEEEEE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/btn_biodiversity_heritage_lib"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button_white_with_border"
+                    android:clickable="true"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:lines="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/biodiversity_heritage_library_logo" />
                 </LinearLayout>
 
             </LinearLayout>
