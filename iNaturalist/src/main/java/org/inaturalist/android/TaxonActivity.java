@@ -809,7 +809,6 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             @Override
             public void onClick(View v) {
                 String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
-                taxonScientificName = taxonScientificName.replace(" ", "+");
                 String referenceUrl = String.format("https://www.iucnredlist.org/search?query=%s&searchType=species", taxonScientificName);
 
                 Intent i = new Intent(Intent.ACTION_VIEW);
