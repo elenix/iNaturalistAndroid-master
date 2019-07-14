@@ -274,13 +274,12 @@
                     android:id="@+id/activity_badge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:background="#73AC08"
-                    android:textSize="9sp"
-                    android:text="32 new"
                     android:layout_marginLeft="8dp"
+                    android:background="#5c001e"
                     android:padding="4dp"
-                    />
+                    android:text="32 new"
+                    android:textColor="#ffffff"
+                    android:textSize="9sp" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/menu_missions"

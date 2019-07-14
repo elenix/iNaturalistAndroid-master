@@ -68,12 +68,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/what_to_look_for"
-                    android:textSize="14sp"
-                    android:textColor="#FF74AC00"
                     android:layout_marginBottom="10dp"
-                    android:textStyle="bold"
-                    />
+                    android:text="@string/what_to_look_for"
+                    android:textColor="#FF5c001e"
+                    android:textColorHighlight="#995c001e"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/taxon_name"
@@ -116,12 +116,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/have_been_seen_here"
-                    android:textSize="14sp"
-                    android:textColor="#FF74AC00"
                     android:layout_marginBottom="10dp"
-                    android:textStyle="bold"
-                    />
+                    android:text="@string/have_been_seen_here"
+                    android:textColor="#FF5c001e"
+                    android:textColorHighlight="#995c001e"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -211,12 +211,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/nearby_missions"
-                    android:textSize="14sp"
-                    android:textColor="#FF74AC00"
                     android:layout_marginBottom="10dp"
-                    android:textStyle="bold"
-                    />
+                    android:text="@string/nearby_missions"
+                    android:textColor="#FF5c001e"
+                    android:textColorHighlight="#995c001e"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/nearby_missions_view_pager"
@@ -235,12 +235,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/about_taxon_short"
-                    android:textSize="14sp"
-                    android:textColor="#FF74AC00"
                     android:layout_marginBottom="10dp"
-                    android:textStyle="bold"
-                    />
+                    android:text="@string/about_taxon_short"
+                    android:textColor="#FF5c001e"
+                    android:textColorHighlight="#995c001e"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -307,12 +307,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/nearby_observations"
-                    android:textSize="14sp"
-                    android:textColor="#FF74AC00"
                     android:layout_marginBottom="10dp"
-                    android:textStyle="bold"
-                    />
+                    android:text="@string/nearby_observations"
+                    android:textColor="#FF5c001e"
+                    android:textColorHighlight="#995c001e"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

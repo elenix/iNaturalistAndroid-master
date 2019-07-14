@@ -8,6 +8,7 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     >
+
     <ImageView
         android:id="@+id/view_children"
         android:layout_width="24dp"
@@ -15,16 +16,16 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="9dp"
-        android:tint="#75AA1F"
-        android:src="@drawable/ic_subdirectory_arrow_right_black_48dp" />
+        android:src="@drawable/ic_subdirectory_arrow_right_black_48dp"
+        android:tint="#5c001e" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:textColor="#75AA1F"
-        android:layout_toRightOf="@id/view_children"
         android:layout_centerVertical="true"
-        android:text="@string/view_children" />
+        android:layout_toRightOf="@id/view_children"
+        android:text="@string/view_children"
+        android:textColor="#5c001e"
+        android:textSize="17sp" />
 
 </RelativeLayout>

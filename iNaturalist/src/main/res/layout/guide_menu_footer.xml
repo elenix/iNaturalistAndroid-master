@@ -68,14 +68,14 @@
 
         <TextView
             android:id="@+id/editorName"
-            android:text="username"
-            android:textColor="#ff36b859"
-            android:textStyle="bold"
-            android:textSize="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="username"
+            android:textColor="#ffc73c6a"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
         <TextView
             android:text="@string/editor"
@@ -99,14 +99,14 @@
 
         <TextView
             android:id="@+id/license"
-            android:text="some license"
-            android:textColor="#ff36b859"
-            android:textStyle="bold"
-            android:textSize="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="some license"
+            android:textColor="#ffc73c6a"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
         <TextView
             android:text="@string/license"

@@ -1007,8 +1007,26 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
 
 
-        if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated")) || (conservationStatusName.equals("data_deficient")) ||
-                (conservationStatusName.equals("least_concern")) ) {
+//        if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated")) || (conservationStatusName.equals("data_deficient")) ||
+//                (conservationStatusName.equals("least_concern")) ) {
+//            mConservationStatusContainer.setVisibility(View.GONE);
+//        } else {
+//            mConservationStatusContainer.setVisibility(View.VISIBLE);
+//
+//            int textColor = mApp.getColorResourceByName("conservation_" + conservationStatusName + "_text");
+//            int backgroundColor = mApp.getColorResourceByName("conservation_" + conservationStatusName + "_bg");
+//
+//            mConservationStatus.setText(mApp.getStringResourceByName("conservation_status_" + conservationStatusName));
+//            mConservationStatusContainer.setBackgroundColor(backgroundColor);
+//            mConservationStatus.setTextColor(textColor);
+//            mConservationSource.setTextColor(textColor);
+//            mConservationSource.setText(Html.fromHtml(String.format(getString(R.string.conservation_source), conservationStatus.optString("authority"))));
+//            Drawable drawable = getResources().getDrawable(R.drawable.ic_open_in_browser_black_24dp);
+//            drawable.setColorFilter(new PorterDuffColorFilter(textColor, PorterDuff.Mode.SRC_IN));
+//            mConservationSource.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+//        }
+
+        if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated"))) {
             mConservationStatusContainer.setVisibility(View.GONE);
         } else {
             mConservationStatusContainer.setVisibility(View.VISIBLE);

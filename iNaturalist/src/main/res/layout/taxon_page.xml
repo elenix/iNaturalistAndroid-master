@@ -108,12 +108,12 @@
                 android:clickable="true"
                 android:layout_marginRight="10dp"
                 >
+
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_compare"
-                    android:tint="#74ac00"
-                    />
+                    android:tint="#5c001e" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -638,12 +638,12 @@
                 android:layout_marginLeft="17dp"
                 android:layout_marginRight="17dp"
                 android:layout_height="48dp">
+
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_open_in_browser_black_24dp"
-                    android:tint="#75AA1F"
-                    />
+                    android:tint="#5c001e" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -187,17 +187,16 @@
 
         <TextView
             android:id="@+id/onboarding_species_name_close"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/got_it_all_caps"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/onboarding_species_name_description"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/onboarding_species_name_description"
-            android:paddingTop="10dp"
-            android:textColor="#8BB929"
-            android:textStyle="bold"
             android:layout_marginRight="16dp"
-            />
+            android:paddingTop="10dp"
+            android:text="@string/got_it_all_caps"
+            android:textColor="#5c001e"
+            android:textStyle="bold" />
     </RelativeLayout>
 
 
@@ -580,7 +579,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:src="@drawable/ic_action_accept"
-                android:background="#74ac00"
+                android:background="#5c001e"
                 android:tint="#ffffff"
                 android:visibility="gone"
                 />

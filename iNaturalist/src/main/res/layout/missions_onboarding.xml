@@ -1,62 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#FF74AC00"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    android:background="#FF5c001e">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:background="#FF74AC00"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FF5c001e"
         android:gravity="center_horizontal"
-        android:padding="39dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="39dp">
 
         <ImageView
             android:id="@+id/icon"
             android:layout_width="69dp"
             android:layout_height="82dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_flag_black_48dp"
-            android:tint="#FFA4E817"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
-            />
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_flag_black_48dp"
+            android:tint="#04E9FF" />
+
         <TextView
             android:id="@+id/title"
-            android:layout_below="@id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/introducing_missions"
+            android:layout_below="@id/icon"
             android:layout_centerInParent="true"
-            android:textColor="#ffffff"
             android:layout_marginTop="63dp"
-            android:textSize="24sp"
-            />
+            android:text="@string/introducing_missions"
+            android:textColor="#ffffff"
+            android:textColorHighlight="#995c001e"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/missions_onboarding_description"
-            android:textSize="13sp"
-            android:textColor="#ffffff"
-            android:layout_marginTop="12dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
             android:gravity="center"
-            />
+            android:text="@string/missions_onboarding_description"
+            android:textColor="#ffffff"
+            android:textColorHighlight="#995c001e"
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/got_it"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="@string/ok_got_it"
-            android:background="@drawable/circular_button_light_maroon"
             android:layout_centerHorizontal="true"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
             android:layout_marginTop="81dp"
-            />
+            android:background="@drawable/circular_button_light_maroon"
+            android:text="@string/ok_got_it"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
 
     </LinearLayout>
 </ScrollView>
