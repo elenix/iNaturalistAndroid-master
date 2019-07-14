@@ -163,7 +163,7 @@
                     android:layout_height="18dp"
                     android:src="@drawable/ic_done_black_24dp"
                     android:tint="#FFFFFF"
-                    android:background="@drawable/circular_green_background"
+                    android:background="@drawable/circular_maroon_background"
                     />
                 <TextView
                     android:id="@+id/id_agree_text"

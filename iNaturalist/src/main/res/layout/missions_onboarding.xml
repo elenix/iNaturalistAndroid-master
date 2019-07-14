@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="@string/ok_got_it"
-            android:background="@drawable/circular_button_light_green"
+            android:background="@drawable/circular_button_light_maroon"
             android:layout_centerHorizontal="true"
             android:textColor="#ffffff"
             android:textSize="18sp"

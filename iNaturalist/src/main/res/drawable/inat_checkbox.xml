@@ -7,5 +7,5 @@
         />
     <item
         android:state_selected="true"
-        android:drawable="@drawable/checkbox_checked_green" />
+        android:drawable="@drawable/checkbox_checked_maroon" />
 </selector>

@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -760,7 +759,7 @@ public class ExploreFiltersActivity extends AppCompatActivity {
                     .fit()
                     .into(viewHolder.imageView);
 
-            viewHolder.background.setBackgroundResource(isSelected ? R.drawable.selected_light_green_with_border : 0);
+            viewHolder.background.setBackgroundResource(isSelected ? R.drawable.selected_light_maroon_with_border : 0);
 
             viewHolder.background.setOnClickListener(new View.OnClickListener() {
                 @Override

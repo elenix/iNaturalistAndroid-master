@@ -70,7 +70,7 @@
                     android:src="@drawable/ic_keyboard_arrow_left_black_48dp"
                     android:tint="#ffffff"
                     android:layout_marginRight="8dp"
-                    android:background="@drawable/circle_green"
+                    android:background="@drawable/circle_maroon"
                     />
 
                 <ImageView
@@ -80,7 +80,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_keyboard_arrow_right_black_48dp"
-                    android:background="@drawable/circle_green"
+                    android:background="@drawable/circle_maroon"
                     android:tint="#ffffff"
                     android:layout_marginLeft="8dp"
                     />
@@ -144,7 +144,7 @@
 
                 <LinearLayout
                     android:id="@+id/select_taxon"
-                    android:background="@drawable/circular_button_green"
+                    android:background="@drawable/circular_button_maroon"
                     android:layout_width="148dp"
                     android:layout_height="36dp"
                     android:lines="1"
@@ -170,7 +170,7 @@
 
                 <LinearLayout
                     android:id="@+id/enlarge_taxon"
-                    android:background="@drawable/circular_button_green"
+                    android:background="@drawable/circular_button_maroon"
                     android:layout_width="148dp"
                     android:layout_height="36dp"
                     android:lines="1"
@@ -197,7 +197,7 @@
 
                 <LinearLayout
                     android:id="@+id/about_taxon"
-                    android:background="@drawable/circular_button_green"
+                    android:background="@drawable/circular_button_maroon"
                     android:layout_width="148dp"
                     android:layout_height="36dp"
                     android:lines="1"
