@@ -6,16 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -69,7 +66,6 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -125,6 +121,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private CirclePageIndicator mPhotosIndicator;
     private TextView mTaxonName;
     private TextView mTaxonScientificName;
+    private TextView mTaxonGenomeAvailibilty;
     private TextView mWikipediaSummary;
     private ViewGroup mConservationStatusContainer;
     private TextView mConservationStatus;
@@ -141,7 +138,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private ViewGroup mBtnBHL;
     private ViewGroup mBtnZipcodeZoo;
     private ViewGroup mBtnWikipedia;
-    private ViewGroup mBtnIUCN;
+    private ViewGroup mBtnIucn;
     private ViewGroup mBtnGbif;
     private ViewGroup mBtnNcbi;
     private ListView mTaxonomyList;
@@ -671,6 +668,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mPhotosIndicator = (CirclePageIndicator) findViewById(R.id.photos_indicator);
         mTaxonName = (TextView) findViewById(R.id.taxon_name);
         mTaxonScientificName = (TextView) findViewById(R.id.taxon_scientific_name);
+        mTaxonGenomeAvailibilty = (TextView) findViewById(R.id.taxon_genome_availability);
         mWikipediaSummary = (TextView) findViewById(R.id.wikipedia_summary);
         mConservationStatusContainer = (ViewGroup) findViewById(R.id.conservation_status_container);
         mConservationStatus = (TextView) findViewById(R.id.conservation_status);
@@ -732,7 +730,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mBtnBHL = (ViewGroup) findViewById(R.id.btn_biodiversity_heritage_lib);
         mBtnZipcodeZoo = (ViewGroup) findViewById(R.id.btn_zipcode_zoo);
         mBtnWikipedia = (ViewGroup) findViewById(R.id.btn_wikipedia);
-        mBtnIUCN = (ViewGroup) findViewById(R.id.btn_international_union_conservation_nature);
+        mBtnIucn = (ViewGroup) findViewById(R.id.btn_international_union_conservation_nature);
         mBtnGbif = (ViewGroup) findViewById(R.id.btn_global_biodiversity_information_facility);
         mBtnNcbi = (ViewGroup) findViewById(R.id.btn_national_center_biotechnology_information);
 
@@ -805,7 +803,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         });
 
         /* Set the button listener for reference button - SCIRUS. */
-        mBtnIUCN.setOnClickListener(new View.OnClickListener() {
+        mBtnIucn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
@@ -836,7 +834,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             public void onClick(View v) {
                 String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
                 taxonScientificName = taxonScientificName.replace(" ", "+");
-                String referenceUrl = String.format("https://www.ncbi.nlm.nih.gov/search/all/?term=%s", taxonScientificName);
+                String referenceUrl = String.format("https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=%s", taxonScientificName);
 
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(referenceUrl));
@@ -954,6 +952,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     }
 
     private void loadTaxon() {
+
         if (mTaxon == null) {
             finish();
             return;
@@ -965,6 +964,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             // Show scientific name first, before common name
             TaxonUtils.setTaxonScientificName(mTaxonName, mTaxon.getJSONObject());
             mTaxonScientificName.setText(TaxonUtils.getTaxonName(this, mTaxon.getJSONObject()));
+
             getSupportActionBar().setTitle(TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject()));
         } else {
             TaxonUtils.setTaxonScientificName(mTaxonScientificName, mTaxon.getJSONObject());
@@ -972,6 +972,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             getSupportActionBar().setTitle(taxonName);
         }
 
+        mTaxonGenomeAvailibilty.setText(String.format("Taxon id=%d", mTaxon.getInt("id")));
 
         String wikiSummary = mTaxon.getString("wikipedia_summary");
 

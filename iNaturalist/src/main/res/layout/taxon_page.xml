@@ -183,6 +183,16 @@
                 android:textIsSelectable="true"
                 android:textSize="16sp" />
 
+            <TextView
+                android:id="@+id/taxon_genome_availability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Taxon genome: yes/no"
+                android:textColor="#757575"
+                android:textIsSelectable="true"
+                android:textSize="16sp" />
+
 
             <LinearLayout
                 android:id="@+id/taxon_inactive"
