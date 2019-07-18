@@ -75,7 +75,6 @@
                 android:layout_height="250dp" />
 
             <com.viewpagerindicator.CirclePageIndicator
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/photos_indicator"
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
@@ -94,7 +93,8 @@
             android:padding="15dp"
             android:background="#EEEEEE"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:id="@+id/compare_taxon"
@@ -183,16 +183,34 @@
                 android:textIsSelectable="true"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/taxon_genome_availability"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Taxon genome: yes/no"
-                android:textColor="#757575"
-                android:textIsSelectable="true"
-                android:textSize="16sp" />
-
+                android:orientation="horizontal">
+                <!-- Cost Label -->
+                <TextView
+                    android:id="@+id/taxon_genome_availability_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#757575"
+                    android:textIsSelectable="true"
+                    android:textSize="16sp"
+                    android:text="Genome Availability: " >
+                </TextView>
+                <!-- Price Label -->
+                <TextView
+                    android:id="@+id/taxon_genome_availability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#757575"
+                    android:textIsSelectable="true"
+                    android:textSize="16sp"
+                    android:text="loading....">
+                </TextView>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/taxon_inactive"
@@ -343,6 +361,122 @@
                     <!--android:layout_height="250dp" />-->
 
             </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#8A000000"
+                android:text="NCBI Entrez Records"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="16dp"
+                />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TableRow android:background="#5c001e" android:padding="5dp" android:gravity="center" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Database Name"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:text="Count"
+                        android:textColor="#FFFFFF"/>
+                </TableRow>
+                <TableRow android:background="#DAE8FC" android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/genome_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:text="Genome"
+                        android:textColor="#000000"/>
+
+                    <TextView
+                        android:id="@+id/genome_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:text="-"
+                        android:textColor="#000000"/>
+                </TableRow>
+                <TableRow android:background="#DAE8FC" android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/gene_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:text="Gene"
+                        android:textColor="#000000"/>
+
+                    <TextView
+                        android:id="@+id/gene_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:text="-"
+                        android:textColor="#000000"/>
+                </TableRow>
+                <TableRow android:background="#DAE8FC" android:padding="5dp">
+                    <TextView
+                        android:id="@+id/nucleotide_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:text="Nucleotide"
+                        android:textColor="#000000"/>
+
+                    <TextView
+                        android:id="@+id/nucleotide_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:text="-"
+                        android:textColor="#000000"/>
+                </TableRow>
+                <TableRow android:background="#DAE8FC" android:padding="5dp">
+                    <TextView
+                        android:id="@+id/protein_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:text="Protein"
+                        android:textColor="#000000"/>
+
+                    <TextView
+                        android:id="@+id/protein_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:text="-"
+                        android:textColor="#000000"/>
+                </TableRow>
+            </TableLayout>
 
             <TextView
                 android:id="@+id/relatedLink"
@@ -503,7 +637,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:src="@drawable/national_center_biotechnology_information_logo" />
+                        android:src="@drawable/national_center_biotechnology_information_logo"
+                        android:contentDescription="TODO" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -605,7 +740,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    />
+                    android:layout_marginStart="16dp" />
 
                 <ImageView
                     android:id="@+id/taxonomy_info"
