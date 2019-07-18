@@ -163,17 +163,17 @@
                     android:layout_height="18dp"
                     android:src="@drawable/ic_done_black_24dp"
                     android:tint="#FFFFFF"
-                    android:background="@drawable/circular_green_background"
+                    android:background="@drawable/circular_maroon_background"
                     />
+
                 <TextView
                     android:id="@+id/id_agree_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/agree_all_caps"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#86AB03"
                     android:layout_marginLeft="7dp"
-                    />
+                    android:text="@string/agree_all_caps"
+                    android:textColor="#5c001e" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

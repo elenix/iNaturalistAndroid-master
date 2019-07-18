@@ -70,10 +70,10 @@
             android:id="@+id/visually_similar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#72AA00"
-            android:textSize="12sp"
             android:layout_marginTop="3dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#5c001e"
+            android:textSize="12sp" />
     </LinearLayout>
 
 

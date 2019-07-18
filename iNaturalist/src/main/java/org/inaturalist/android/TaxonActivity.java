@@ -6,16 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -66,10 +64,13 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -108,6 +109,12 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     public static String DOWNLOAD_TAXON = "download_taxon";
     public static String TAXON_SUGGESTION = "taxon_suggestion";
 
+    private URL genomeUrl;
+    private URL geneUrl;
+    private URL nucleotideUrl;
+    private URL proteinUrl;
+
+
     private INaturalistApp mApp;
     private ActivityHelper mHelper;
     @State(AndroidStateBundlers.BetterJSONObjectBundler.class)
@@ -119,38 +126,33 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     @State(AndroidStateBundlers.BetterJSONObjectBundler.class)
     public BetterJSONObject mObservation;
 
+    private CirclePageIndicator mPhotosIndicator;
+    private GoogleMap mMap;
+    private HackyViewPager mPhotosViewPager;
+    private ImageView mTaxonicIcon;
+
     private ViewGroup mPhotosContainer;
     private ViewGroup mNoPhotosContainer;
-    private HackyViewPager mPhotosViewPager;
-    private CirclePageIndicator mPhotosIndicator;
-    private TextView mTaxonName;
-    private TextView mTaxonScientificName;
-    private TextView mWikipediaSummary;
     private ViewGroup mConservationStatusContainer;
-    private TextView mConservationStatus;
-    private TextView mConservationSource;
-    private ProgressBar mLoadingPhotos;
-    private GoogleMap mMap;
-    private ScrollView mScrollView;
-    private ImageView mTaxonomyIcon;
-    private ViewGroup mViewOnINat;
-    private ViewGroup mTaxonButtons;
-    private ViewGroup mSelectTaxon;
-    private ViewGroup mCompareTaxon;
-    private ViewGroup mBtnGoogleScholar;
-    private ViewGroup mBtnBHL;
-    private ViewGroup mBtnZipcodeZoo;
-    private ViewGroup mBtnWikipedia;
-    private ViewGroup mBtnIUCN;
-    private ViewGroup mBtnGbif;
-    private ViewGroup mBtnNcbi;
-    private ListView mTaxonomyList;
-    private ImageView mTaxonicIcon;
     private ViewGroup mTaxonInactive;
-    private TabLayout mSeasonabilityTabLayout;
-    private ViewPager mSeasonabilityViewPager;
+    private ListView mTaxonomyList;
+    private ProgressBar mLoadingPhotos;
     private ProgressBar mLoadingSeasonability;
     private ProgressBar mLoadingHistogram;
+    private ScrollView mScrollView;
+    private TextView mTaxonName;
+    private TextView mTaxonScientificName;
+    private TextView mTaxonGenomeAvailibilty;
+    private TextView mTaxonGenomeCount;
+    private TextView mTaxonGeneCount;
+    private TextView mTaxonNucleotideCount;
+    private TextView mTaxonProteinCount;
+    private TextView mWikipediaSummary;
+    private TextView mConservationStatus;
+    private TextView mConservationSource;
+    private TabLayout mSeasonabilityTabLayout;
+    private ViewPager mSeasonabilityViewPager;
+
 
     @State
     public boolean mMapBoundsSet = false;
@@ -671,10 +673,36 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mPhotosIndicator = (CirclePageIndicator) findViewById(R.id.photos_indicator);
         mTaxonName = (TextView) findViewById(R.id.taxon_name);
         mTaxonScientificName = (TextView) findViewById(R.id.taxon_scientific_name);
+        mTaxonGenomeAvailibilty = (TextView) findViewById(R.id.taxon_genome_availability);
         mWikipediaSummary = (TextView) findViewById(R.id.wikipedia_summary);
         mConservationStatusContainer = (ViewGroup) findViewById(R.id.conservation_status_container);
         mConservationStatus = (TextView) findViewById(R.id.conservation_status);
         mConservationSource = (TextView) findViewById(R.id.conservation_source);
+
+        //NCBI XML textview
+        mTaxonGenomeCount = findViewById(R.id.genome_count);
+        mTaxonGeneCount = findViewById(R.id.gene_count);
+        mTaxonNucleotideCount = findViewById(R.id.nucleotide_count);
+        mTaxonProteinCount = findViewById(R.id.protein_count);
+
+        ViewGroup mViewOnINat = (ViewGroup) findViewById(R.id.view_on_inat);
+        mLoadingPhotos = (ProgressBar) findViewById(R.id.loading_photos);
+        ViewGroup mTaxonButtons = (ViewGroup) findViewById(R.id.taxon_buttons);
+        ViewGroup mSelectTaxon = (ViewGroup) findViewById(R.id.select_taxon);
+        ViewGroup mCompareTaxon = (ViewGroup) findViewById(R.id.compare_taxon);
+
+        //Related link button
+        ViewGroup mBtnGoogleScholar = (ViewGroup) findViewById(R.id.btn_google_scholar);
+        ViewGroup mBtnBHL = (ViewGroup) findViewById(R.id.btn_biodiversity_heritage_lib);
+        ViewGroup mBtnZipcodeZoo = (ViewGroup) findViewById(R.id.btn_zipcode_zoo);
+        ViewGroup mBtnWikipedia = (ViewGroup) findViewById(R.id.btn_wikipedia);
+        ViewGroup mBtnIucn = (ViewGroup) findViewById(R.id.btn_international_union_conservation_nature);
+        ViewGroup mBtnGbif = (ViewGroup) findViewById(R.id.btn_global_biodiversity_information_facility);
+        ViewGroup mBtnNcbi = (ViewGroup) findViewById(R.id.btn_national_center_biotechnology_information);
+
+        mTaxonicIcon = (ImageView) findViewById(R.id.taxon_iconic_taxon);
+        mTaxonInactive = (ViewGroup) findViewById(R.id.taxon_inactive);
+
         ((ScrollableMapFragment)getSupportFragmentManager().findFragmentById(R.id.observations_map)).getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
@@ -721,23 +749,6 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
             }
         });
-        mViewOnINat = (ViewGroup) findViewById(R.id.view_on_inat);
-        mLoadingPhotos = (ProgressBar) findViewById(R.id.loading_photos);
-        mTaxonButtons = (ViewGroup) findViewById(R.id.taxon_buttons);
-        mSelectTaxon = (ViewGroup) findViewById(R.id.select_taxon);
-        mCompareTaxon = (ViewGroup) findViewById(R.id.compare_taxon);
-
-        //Related link button
-        mBtnGoogleScholar = (ViewGroup) findViewById(R.id.btn_google_scholar);
-        mBtnBHL = (ViewGroup) findViewById(R.id.btn_biodiversity_heritage_lib);
-        mBtnZipcodeZoo = (ViewGroup) findViewById(R.id.btn_zipcode_zoo);
-        mBtnWikipedia = (ViewGroup) findViewById(R.id.btn_wikipedia);
-        mBtnIUCN = (ViewGroup) findViewById(R.id.btn_international_union_conservation_nature);
-        mBtnGbif = (ViewGroup) findViewById(R.id.btn_global_biodiversity_information_facility);
-        mBtnNcbi = (ViewGroup) findViewById(R.id.btn_national_center_biotechnology_information);
-
-        mTaxonicIcon = (ImageView) findViewById(R.id.taxon_iconic_taxon);
-        mTaxonInactive = (ViewGroup) findViewById(R.id.taxon_inactive);
 
         mTaxonButtons.setVisibility(mTaxonSuggestion != TAXON_SUGGESTION_NONE ? View.VISIBLE : View.GONE);
 
@@ -805,11 +816,10 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         });
 
         /* Set the button listener for reference button - SCIRUS. */
-        mBtnIUCN.setOnClickListener(new View.OnClickListener() {
+        mBtnIucn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
-                taxonScientificName = taxonScientificName.replace(" ", "+");
                 String referenceUrl = String.format("https://www.iucnredlist.org/search?query=%s&searchType=species", taxonScientificName);
 
                 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -837,7 +847,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             public void onClick(View v) {
                 String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
                 taxonScientificName = taxonScientificName.replace(" ", "+");
-                String referenceUrl = String.format("https://www.ncbi.nlm.nih.gov/search/all/?term=%s", taxonScientificName);
+                String referenceUrl = String.format("https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=%s", taxonScientificName);
 
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(referenceUrl));
@@ -894,7 +904,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             }
         });
 
-        mTaxonomyIcon = (ImageView) findViewById(R.id.taxonomy_info);
+        ImageView mTaxonomyIcon = (ImageView) findViewById(R.id.taxonomy_info);
         mTaxonomyList = (ListView) findViewById(R.id.taxonomy_list);
 
         mTaxonomyIcon.setOnClickListener(new View.OnClickListener() {
@@ -925,7 +935,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         loadTaxon();
-
+        new AsyncParseXML().execute();
         initSeasonabilityCharts();
     }
 
@@ -955,6 +965,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     }
 
     private void loadTaxon() {
+
         if (mTaxon == null) {
             finish();
             return;
@@ -966,13 +977,13 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             // Show scientific name first, before common name
             TaxonUtils.setTaxonScientificName(mTaxonName, mTaxon.getJSONObject());
             mTaxonScientificName.setText(TaxonUtils.getTaxonName(this, mTaxon.getJSONObject()));
+
             getSupportActionBar().setTitle(TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject()));
         } else {
             TaxonUtils.setTaxonScientificName(mTaxonScientificName, mTaxon.getJSONObject());
             mTaxonName.setText(TaxonUtils.getTaxonName(this, mTaxon.getJSONObject()));
             getSupportActionBar().setTitle(taxonName);
         }
-
 
         String wikiSummary = mTaxon.getString("wikipedia_summary");
 
@@ -1007,8 +1018,26 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
 
 
-        if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated")) || (conservationStatusName.equals("data_deficient")) ||
-                (conservationStatusName.equals("least_concern")) ) {
+//        if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated")) || (conservationStatusName.equals("data_deficient")) ||
+//                (conservationStatusName.equals("least_concern")) ) {
+//            mConservationStatusContainer.setVisibility(View.GONE);
+//        } else {
+//            mConservationStatusContainer.setVisibility(View.VISIBLE);
+//
+//            int textColor = mApp.getColorResourceByName("conservation_" + conservationStatusName + "_text");
+//            int backgroundColor = mApp.getColorResourceByName("conservation_" + conservationStatusName + "_bg");
+//
+//            mConservationStatus.setText(mApp.getStringResourceByName("conservation_status_" + conservationStatusName));
+//            mConservationStatusContainer.setBackgroundColor(backgroundColor);
+//            mConservationStatus.setTextColor(textColor);
+//            mConservationSource.setTextColor(textColor);
+//            mConservationSource.setText(Html.fromHtml(String.format(getString(R.string.conservation_source), conservationStatus.optString("authority"))));
+//            Drawable drawable = getResources().getDrawable(R.drawable.ic_open_in_browser_black_24dp);
+//            drawable.setColorFilter(new PorterDuffColorFilter(textColor, PorterDuff.Mode.SRC_IN));
+//            mConservationSource.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+//        }
+
+        if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated"))) {
             mConservationStatusContainer.setVisibility(View.GONE);
         } else {
             mConservationStatusContainer.setVisibility(View.VISIBLE);
@@ -1188,8 +1217,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
 
     public static class TaxonPhotosPagerAdapter extends PagerAdapter {
- 		private int mDefaultTaxonIcon;
- 		private List<JSONObject> mTaxonPhotos;
+        private List<JSONObject> mTaxonPhotos;
         private Context mContext;
         private JSONObject mTaxon;
 
@@ -1200,7 +1228,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             mTaxon = taxon;
             mTaxonPhotos = new ArrayList<>();
 
-            mDefaultTaxonIcon = TaxonUtils.observationIcon(taxon);
+            TaxonUtils.observationIcon(taxon);
 
             JSONArray taxonPhotos = taxon.optJSONArray("taxon_photos");
 
@@ -1314,4 +1342,113 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             }
         }
     }
+
+    public class AsyncParseXML extends AsyncTask {
+
+        String genomeValue;
+        String geneValue;
+        String nucleotideValue;
+        String proteinValue;
+
+        String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            try{
+                genomeUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=genome&term=" + taxonScientificName);
+                geneUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=gene&term=" + taxonScientificName);
+                nucleotideUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=nucleotide&term=" + taxonScientificName);
+                proteinUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=protein&term=" + taxonScientificName);
+                int eventType;
+
+                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(false);
+                XmlPullParser parser = factory.newPullParser();
+
+                parser.setInput(genomeUrl.openConnection().getInputStream(), "UTF_8");
+                eventType = parser.getEventType();
+
+                while (eventType != XmlPullParser.END_DOCUMENT){
+                    if(eventType == XmlPullParser.START_TAG) {
+                        Log.i("AsyncParseXML", "START_TAG: " + parser.getName());
+
+                        if(parser.getName().equals("Count")){
+                            genomeValue = parser.nextText();
+                        }
+                    }
+
+                    eventType = parser.next();
+                }
+
+                parser.setInput(geneUrl.openConnection().getInputStream(), "UTF_8");
+                eventType = parser.getEventType();
+
+                while (eventType != XmlPullParser.END_DOCUMENT){
+                    if(eventType == XmlPullParser.START_TAG) {
+                        Log.i("AsyncParseXML", "START_TAG: " + parser.getName());
+
+                        if(parser.getName().equals("Count")){
+                            geneValue = parser.nextText();
+                        }
+                    }
+
+                    eventType = parser.next();
+                }
+
+                parser.setInput(nucleotideUrl.openConnection().getInputStream(), "UTF_8");
+                eventType = parser.getEventType();
+
+                while (eventType != XmlPullParser.END_DOCUMENT){
+                    if(eventType == XmlPullParser.START_TAG) {
+                        Log.i("AsyncParseXML", "START_TAG: " + parser.getName());
+
+                        if(parser.getName().equals("Count")){
+                            nucleotideValue = parser.nextText();
+                        }
+                    }
+
+                    eventType = parser.next();
+                }
+
+                parser.setInput(proteinUrl.openConnection().getInputStream(), "UTF_8");
+                eventType = parser.getEventType();
+
+                while (eventType != XmlPullParser.END_DOCUMENT){
+                    if(eventType == XmlPullParser.START_TAG) {
+                        Log.i("AsyncParseXML", "START_TAG: " + parser.getName());
+
+                        if(parser.getName().equals("Count")){
+                            proteinValue = parser.nextText();
+                        }
+                    }
+
+                    eventType = parser.next();
+                }
+
+            } catch (MalformedURLException e){
+                Log.i("AsyncParseXML", "MalformedURLException: " + e.getMessage());
+            } catch (XmlPullParserException e){
+                Log.i("AsyncParseXML", "XmlPullParserException: " + e.getMessage());
+            } catch (IOException e){
+                Log.i("AsyncParseXML", "IOException: "+e.getMessage());
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+
+            mTaxonGenomeAvailibilty.setText(genomeValue);
+
+            mTaxonGenomeCount.setText(genomeValue);
+            mTaxonGeneCount.setText(geneValue);
+            mTaxonNucleotideCount.setText(nucleotideValue);
+            mTaxonProteinCount.setText(proteinValue);
+
+        }
+    }
+
 }

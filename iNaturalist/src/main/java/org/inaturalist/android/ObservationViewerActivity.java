@@ -1438,7 +1438,7 @@ public class ObservationViewerActivity extends AppCompatActivity implements Anno
             mNeedsIdLine.setBackgroundColor(green);
             mResearchGradeLine.setBackgroundColor(green);
             mNeedsIdText.setTextColor(green);
-            mNeedsIdIcon.setBackgroundResource(R.drawable.circular_border_thick_green);
+            mNeedsIdIcon.setBackgroundResource(R.drawable.circular_border_thick_maroon);
             mNeedsIdIcon.setImageResource(R.drawable.ic_done_black_24dp);
             mResearchGradeLine.setBackgroundColor(gray);
             mResearchGradeText.setTextColor(gray);
@@ -1448,11 +1448,11 @@ public class ObservationViewerActivity extends AppCompatActivity implements Anno
             mNeedsIdLine.setBackgroundColor(green);
             mResearchGradeLine.setBackgroundColor(green);
             mNeedsIdText.setTextColor(green);
-            mNeedsIdIcon.setBackgroundResource(R.drawable.circular_border_thick_green);
+            mNeedsIdIcon.setBackgroundResource(R.drawable.circular_border_thick_maroon);
             mNeedsIdIcon.setImageResource(R.drawable.ic_done_black_24dp);
             mResearchGradeLine.setBackgroundColor(green);
             mResearchGradeText.setTextColor(green);
-            mResearchGradeIcon.setBackgroundResource(R.drawable.circular_border_thick_green);
+            mResearchGradeIcon.setBackgroundResource(R.drawable.circular_border_thick_maroon);
             mResearchGradeIcon.setImageResource(R.drawable.ic_done_black_24dp);
         }
 

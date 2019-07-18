@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#FF74AC00"
+    android:background="#FF5c001e"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -14,11 +14,11 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lets_get_started"
             android:layout_centerInParent="true"
+            android:text="@string/lets_get_started"
             android:textColor="#ffffff"
-            android:textSize="35sp"
-            />
+            android:textColorHighlight="#995c001e"
+            android:textSize="35sp" />
         <ImageView
             android:layout_below="@id/title"
             android:layout_width="44dp"
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="@string/view_nearby_observations"
-            android:background="@drawable/circular_button_light_green"
+            android:background="@drawable/circular_button_light_maroon"
             android:layout_centerHorizontal="true"
             android:textColor="#ffffff"
             android:textSize="16sp"

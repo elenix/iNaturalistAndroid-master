@@ -812,7 +812,7 @@
                 android:src="@drawable/ic_done_black_24dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/circular_border_thick_green"
+                android:background="@drawable/circular_border_thick_maroon"
                 android:padding="3dp"
                 android:tint="#8DBA30"
                 />
@@ -823,7 +823,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/ic_done_black_24dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/circular_border_thick_green"
+                android:background="@drawable/circular_border_thick_maroon"
                 android:padding="3dp"
                 android:tint="#8DBA30"
                 />
@@ -835,7 +835,7 @@
                 android:src="@drawable/ic_done_black_24dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/circular_border_thick_green"
+                android:background="@drawable/circular_border_thick_maroon"
                 android:padding="3dp"
                 android:tint="#8DBA30"
                 />
