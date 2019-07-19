@@ -1441,6 +1441,16 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 
+            int result = Integer.parseInt(geneValue);
+            //int result = 0;
+
+            if(result > 0){
+                mTaxonGenomeAvailibilty.setTextColor(Color.parseColor("#006600"));
+            }
+            else {
+                mTaxonGenomeAvailibilty.setTextColor(Color.parseColor("#910101"));
+            }
+
             mTaxonGenomeAvailibilty.setText(genomeValue);
 
             mTaxonGenomeCount.setText(genomeValue);
