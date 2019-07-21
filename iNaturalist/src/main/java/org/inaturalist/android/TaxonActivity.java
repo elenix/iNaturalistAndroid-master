@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -143,6 +144,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private TextView mTaxonName;
     private TextView mTaxonScientificName;
     private TextView mTaxonGenomeAvailibilty;
+    private TextView mIUCNstatus;
     private TextView mTaxonGenomeCount;
     private TextView mTaxonGeneCount;
     private TextView mTaxonNucleotideCount;
@@ -674,6 +676,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mTaxonName = (TextView) findViewById(R.id.taxon_name);
         mTaxonScientificName = (TextView) findViewById(R.id.taxon_scientific_name);
         mTaxonGenomeAvailibilty = (TextView) findViewById(R.id.taxon_genome_availability);
+        mIUCNstatus = (TextView) findViewById(R.id.IUCN_status);
         mWikipediaSummary = (TextView) findViewById(R.id.wikipedia_summary);
         mConservationStatusContainer = (ViewGroup) findViewById(R.id.conservation_status_container);
         mConservationStatus = (TextView) findViewById(R.id.conservation_status);
@@ -1016,28 +1019,39 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             }
         });
 
+        if(conservationStatusName == null){
+            mIUCNstatus.setText("No Data Available");
+        }
+        else if(conservationStatusName.equals("not_evaluated") || conservationStatusName.equals("data_deficient")){
+            mIUCNstatus.setText(conservationStatusName.replace("_", " "));
+        }
+        else if(conservationStatusName.equals("least_concern") || conservationStatusName.equals("near_threatened")){
+            mIUCNstatus.setTextColor(Color.parseColor("#006766"));
+            mIUCNstatus.setText(conservationStatusName.replace("_", " "));
+        }
+        else if(conservationStatusName.equals("vulnerable")){
+            mIUCNstatus.setTextColor(Color.parseColor("#cc9900"));
+            mIUCNstatus.setText("Vulnerable");
+        }
+        else if(conservationStatusName.equals("endangered")){
+            mIUCNstatus.setTypeface(null, Typeface.BOLD);
+            mIUCNstatus.setTextColor(Color.parseColor("#cc6733"));
+            mIUCNstatus.setText((conservationStatusName.replace("_", " ")).toUpperCase());
+        }
+        else if(conservationStatusName.equals("critically_endangered")){
+            mIUCNstatus.setTypeface(null, Typeface.BOLD);
+            mIUCNstatus.setTextColor(Color.parseColor("#cd3333"));
+            mIUCNstatus.setText((conservationStatusName.replace("_", " ")).toUpperCase());
+        }
+        else {
+            mIUCNstatus.setTextColor(Color.parseColor("#000000"));
+            mIUCNstatus.setTypeface(null, Typeface.BOLD);
+            mIUCNstatus.setText((conservationStatusName.replace("_", " ")).toUpperCase());
+        }
 
 
-//        if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated")) || (conservationStatusName.equals("data_deficient")) ||
-//                (conservationStatusName.equals("least_concern")) ) {
-//            mConservationStatusContainer.setVisibility(View.GONE);
-//        } else {
-//            mConservationStatusContainer.setVisibility(View.VISIBLE);
-//
-//            int textColor = mApp.getColorResourceByName("conservation_" + conservationStatusName + "_text");
-//            int backgroundColor = mApp.getColorResourceByName("conservation_" + conservationStatusName + "_bg");
-//
-//            mConservationStatus.setText(mApp.getStringResourceByName("conservation_status_" + conservationStatusName));
-//            mConservationStatusContainer.setBackgroundColor(backgroundColor);
-//            mConservationStatus.setTextColor(textColor);
-//            mConservationSource.setTextColor(textColor);
-//            mConservationSource.setText(Html.fromHtml(String.format(getString(R.string.conservation_source), conservationStatus.optString("authority"))));
-//            Drawable drawable = getResources().getDrawable(R.drawable.ic_open_in_browser_black_24dp);
-//            drawable.setColorFilter(new PorterDuffColorFilter(textColor, PorterDuff.Mode.SRC_IN));
-//            mConservationSource.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-//        }
-
-        if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated"))) {
+        if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated")) || (conservationStatusName.equals("data_deficient")) ||
+                (conservationStatusName.equals("least_concern")) ) {
             mConservationStatusContainer.setVisibility(View.GONE);
         } else {
             mConservationStatusContainer.setVisibility(View.VISIBLE);

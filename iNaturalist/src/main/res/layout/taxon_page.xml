@@ -173,15 +173,61 @@
                 android:textIsSelectable="true"
                 android:textSize="22sp" />
 
-            <TextView
-                android:id="@+id/taxon_scientific_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Argia Vivida"
-                android:textColor="#757575"
-                android:textIsSelectable="true"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
+                <!-- Cost Label -->
+                <TextView
+                    android:id="@+id/taxon_scientific_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#757575"
+                    android:textIsSelectable="true"
+                    android:textSize="16sp"
+                    android:text="Scientific Name: " >
+                </TextView>
+                <TextView
+                    android:id="@+id/taxon_scientific_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#757575"
+                    android:textIsSelectable="true"
+                    android:textSize="16sp"
+                    android:text="loading....">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Cost Label -->
+                <TextView
+                    android:id="@+id/IUCN_status_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="IUCN Status: "
+                    android:textColor="#757575"
+                    android:textIsSelectable="true"
+                    android:textSize="16sp"></TextView>
+                <!-- Price Label -->
+                <TextView
+                    android:id="@+id/IUCN_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#757575"
+                    android:textIsSelectable="true"
+                    android:textSize="16sp"
+                    android:text="loading....">
+                </TextView>
+            </LinearLayout>
 
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -199,7 +245,6 @@
                     android:textSize="16sp"
                     android:text="Genome Availability: " >
                 </TextView>
-                <!-- Price Label -->
                 <TextView
                     android:id="@+id/taxon_genome_availability"
                     android:layout_width="wrap_content"
@@ -241,7 +286,7 @@
                 android:id="@+id/wikipedia_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:lineSpacingMultiplier="1.2"
                 android:text="I am the very model of a modern major general / I've information animal, mineral, and vegetable / I know the kings of England and I quote the fights historical / From Marathon to Waterloo in order categorical."
                 android:textColor="#000000"
