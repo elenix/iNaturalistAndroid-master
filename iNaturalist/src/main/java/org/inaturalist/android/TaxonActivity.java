@@ -1025,9 +1025,13 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         else if(conservationStatusName.equals("not_evaluated") || conservationStatusName.equals("data_deficient")){
             mIUCNstatus.setText(conservationStatusName.replace("_", " "));
         }
-        else if(conservationStatusName.equals("least_concern") || conservationStatusName.equals("near_threatened")){
+        else if(conservationStatusName.equals("least_concern")){
             mIUCNstatus.setTextColor(Color.parseColor("#006766"));
-            mIUCNstatus.setText(conservationStatusName.replace("_", " "));
+            mIUCNstatus.setText("Least Concern");
+        }
+        else if(conservationStatusName.equals("near_threatened")){
+            mIUCNstatus.setTextColor(Color.parseColor("#006766"));
+            mIUCNstatus.setText("Near Threatened");
         }
         else if(conservationStatusName.equals("vulnerable")){
             mIUCNstatus.setTextColor(Color.parseColor("#cc9900"));
@@ -1050,6 +1054,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         }
 
 
+        //IUCN red bar
         if ((conservationStatusName == null) || (conservationStatusName.equals("not_evaluated")) || (conservationStatusName.equals("data_deficient")) ||
                 (conservationStatusName.equals("least_concern")) ) {
             mConservationStatusContainer.setVisibility(View.GONE);
@@ -1228,7 +1233,6 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
         refreshSeasonality();
     }
-
 
     public static class TaxonPhotosPagerAdapter extends PagerAdapter {
         private List<JSONObject> mTaxonPhotos;

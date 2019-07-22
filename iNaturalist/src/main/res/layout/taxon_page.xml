@@ -178,7 +178,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <!-- Cost Label -->
                 <TextView
                     android:id="@+id/taxon_scientific_name_label"
                     android:layout_width="wrap_content"
@@ -206,7 +205,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <!-- Cost Label -->
                 <TextView
                     android:id="@+id/IUCN_status_label"
                     android:layout_width="wrap_content"
@@ -215,8 +213,7 @@
                     android:text="IUCN Status: "
                     android:textColor="#757575"
                     android:textIsSelectable="true"
-                    android:textSize="16sp"></TextView>
-                <!-- Price Label -->
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/IUCN_status"
                     android:layout_width="wrap_content"
@@ -225,8 +222,7 @@
                     android:textColor="#757575"
                     android:textIsSelectable="true"
                     android:textSize="16sp"
-                    android:text="loading....">
-                </TextView>
+                    android:text="loading...."/>
             </LinearLayout>
 
             <LinearLayout
@@ -234,7 +230,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <!-- Cost Label -->
                 <TextView
                     android:id="@+id/taxon_genome_availability_label"
                     android:layout_width="wrap_content"
