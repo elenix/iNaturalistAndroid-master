@@ -120,7 +120,6 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private ActivityHelper mHelper;
     @State(AndroidStateBundlers.BetterJSONObjectBundler.class)
     public BetterJSONObject mTaxon;
-    public BetterJSONObject mTaxonDna;
     private TaxonBoundsReceiver mTaxonBoundsReceiver;
     private TaxonReceiver mTaxonReceiver;
     @State
@@ -593,7 +592,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
 
             boolean isSharedOnApp = intent.getBooleanExtra(INaturalistService.IS_SHARED_ON_APP, false);
-            BetterJSONObject taxon, taxonDna;
+            BetterJSONObject taxon;
 
             if (isSharedOnApp) {
                 taxon = (BetterJSONObject) mApp.getServiceResult(intent.getAction());
@@ -607,7 +606,6 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             }
 
             mTaxon = taxon;
-            //mTaxonDna = taxonDna;
             mDownloadTaxon = false;
 
             Log.i(TAG, "I'm in TaxonReceiver");
@@ -1130,8 +1128,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         centerObservation();
 
         // DNA Visualisation
-        String genbankId = TaxonUtils.getTestDNA(mTaxon.getJSONObject());
-        //String url = String.format("http://mydnamark.org/serverdata/img/dnaVis/%s.gb.png", genbankId);
+        String genbankId = TaxonUtils.getGenbankId(mTaxon.getJSONObject());
         Log.i(TAG, genbankId);
         Picasso.with(getBaseContext())
                 .load("http://mydnamark.org/serverdata/img/dnaVis/" + genbankId + ".gb.png")
@@ -1139,7 +1136,6 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
                 .centerInside()
                 .into(mDNAVis);
         //mTestDNA.setText(genbankId);
-        //mDNAVis.setImageURI(Uri.parse(url));
     }
 
     @Override

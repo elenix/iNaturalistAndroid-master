@@ -134,7 +134,7 @@ public class TaxonUtils {
         }
     }
 
-    public static String getTestDNA(JSONObject item) {
+    public static String getGenbankId(JSONObject item) {
         String displayGenbankId = null;
 
         String test = item.optString("genbankid", "Nothing");
