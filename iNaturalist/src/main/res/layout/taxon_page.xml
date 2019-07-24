@@ -382,16 +382,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp">
 
-                <ProgressBar
-                    android:id="@+id/loading_DNA"
-                    style="?android:attr/progressBarStyleLarge"
+                <!--<ProgressBar-->
+                    <!--android:id="@+id/loading_DNA"-->
+                    <!--style="?android:attr/progressBarStyleLarge"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:padding="30dp"-->
+                    <!--android:visibility="visible"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginTop="50dp"-->
+                    <!--/>-->
+
+                <ImageView
+                    android:id="@+id/dna_vis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/test_DNA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:padding="30dp"
-                    android:visibility="visible"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="50dp"
+                    android:textSize="16sp"
+                    android:textColor="#8A000000"
+                    android:text="@string/DNA_information"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="16dp"
                     />
 
                 <!--<uk.co.senab.photoview.HackyViewPager-->

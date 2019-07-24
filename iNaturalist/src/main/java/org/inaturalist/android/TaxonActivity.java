@@ -120,6 +120,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private ActivityHelper mHelper;
     @State(AndroidStateBundlers.BetterJSONObjectBundler.class)
     public BetterJSONObject mTaxon;
+    public BetterJSONObject mTaxonDna;
     private TaxonBoundsReceiver mTaxonBoundsReceiver;
     private TaxonReceiver mTaxonReceiver;
     @State
@@ -131,6 +132,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private GoogleMap mMap;
     private HackyViewPager mPhotosViewPager;
     private ImageView mTaxonicIcon;
+    private ImageView mDNAVis;
 
     private ViewGroup mPhotosContainer;
     private ViewGroup mNoPhotosContainer;
@@ -154,6 +156,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private TextView mConservationSource;
     private TabLayout mSeasonabilityTabLayout;
     private ViewPager mSeasonabilityViewPager;
+    private TextView mTestDNA;
 
 
     @State
@@ -590,7 +593,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
 
             boolean isSharedOnApp = intent.getBooleanExtra(INaturalistService.IS_SHARED_ON_APP, false);
-            BetterJSONObject taxon;
+            BetterJSONObject taxon, taxonDna;
 
             if (isSharedOnApp) {
                 taxon = (BetterJSONObject) mApp.getServiceResult(intent.getAction());
@@ -598,14 +601,17 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
                 taxon = (BetterJSONObject) intent.getSerializableExtra(INaturalistService.TAXON_RESULT);
             }
 
-
             if (taxon == null) {
                 // Connection error
                 return;
             }
 
             mTaxon = taxon;
+            //mTaxonDna = taxonDna;
             mDownloadTaxon = false;
+
+            Log.i(TAG, "I'm in TaxonReceiver");
+
             loadTaxon();
         }
     }
@@ -681,6 +687,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mConservationStatusContainer = (ViewGroup) findViewById(R.id.conservation_status_container);
         mConservationStatus = (TextView) findViewById(R.id.conservation_status);
         mConservationSource = (TextView) findViewById(R.id.conservation_source);
+        mTestDNA = (TextView) findViewById(R.id.test_DNA);
 
         //NCBI XML textview
         mTaxonGenomeCount = findViewById(R.id.genome_count);
@@ -705,6 +712,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
         mTaxonicIcon = (ImageView) findViewById(R.id.taxon_iconic_taxon);
         mTaxonInactive = (ViewGroup) findViewById(R.id.taxon_inactive);
+        mDNAVis = (ImageView) findViewById(R.id.dna_vis);
 
         ((ScrollableMapFragment)getSupportFragmentManager().findFragmentById(R.id.observations_map)).getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -937,6 +945,8 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         actionBar.setLogo(R.drawable.ic_arrow_back);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        Log.i(TAG, "I'm in onCreate");
+
         loadTaxon();
         new AsyncParseXML().execute();
         initSeasonabilityCharts();
@@ -1118,6 +1128,18 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mTaxonicIcon.setImageResource(TaxonUtils.observationIcon(mTaxon.getJSONObject()));
 
         centerObservation();
+
+        // DNA Visualisation
+        String genbankId = TaxonUtils.getTestDNA(mTaxon.getJSONObject());
+        //String url = String.format("http://mydnamark.org/serverdata/img/dnaVis/%s.gb.png", genbankId);
+        Log.i(TAG, genbankId);
+        Picasso.with(getBaseContext())
+                .load("http://mydnamark.org/serverdata/img/dnaVis/" + genbankId + ".gb.png")
+                .resize(1000, 1000)
+                .centerInside()
+                .into(mDNAVis);
+        //mTestDNA.setText(genbankId);
+        //mDNAVis.setImageURI(Uri.parse(url));
     }
 
     @Override
