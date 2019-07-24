@@ -155,7 +155,6 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private TextView mConservationSource;
     private TabLayout mSeasonabilityTabLayout;
     private ViewPager mSeasonabilityViewPager;
-    private TextView mTestDNA;
 
 
     @State
@@ -685,7 +684,6 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mConservationStatusContainer = (ViewGroup) findViewById(R.id.conservation_status_container);
         mConservationStatus = (TextView) findViewById(R.id.conservation_status);
         mConservationSource = (TextView) findViewById(R.id.conservation_source);
-        mTestDNA = (TextView) findViewById(R.id.test_DNA);
 
         //NCBI XML textview
         mTaxonGenomeCount = findViewById(R.id.genome_count);
@@ -1135,7 +1133,6 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
                 .resize(1000, 1000)
                 .centerInside()
                 .into(mDNAVis);
-        //mTestDNA.setText(genbankId);
     }
 
     @Override
