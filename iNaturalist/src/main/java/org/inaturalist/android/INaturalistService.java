@@ -875,6 +875,12 @@ public class INaturalistService extends IntentService {
             } else if (action.equals(ACTION_GET_TAXON_NEW)) {
                 int taxonId = intent.getIntExtra(TAXON_ID, 0);
                 BetterJSONObject taxon = getTaxonNew(taxonId);
+                JSONObject dnaVis = getDNAVisualisation(taxon);
+                taxon.put("genbankid", dnaVis);
+
+//                Log.i(TAG, "I'm in ACTION_GET_TAXON_NEW");
+//                String test = taxon.getJSONObject().optString("genbankid", "Nothing");
+//                Log.i(TAG, "Test is " + test);
 
                 Intent reply = new Intent(ACTION_GET_TAXON_NEW_RESULT);
                 mApp.setServiceResult(ACTION_GET_TAXON_NEW_RESULT, taxon);
@@ -2165,6 +2171,27 @@ public class INaturalistService extends IntentService {
         }
 
         return new BetterJSONObject(res);
+    }
+
+    private JSONObject getDNAVisualisation(BetterJSONObject mTaxon) throws AuthenticationException {
+        String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+        taxonScientificName = taxonScientificName.replace(" ", "%20");
+        String url = String.format("http://mydnamark.org/serverdata/admin/speciessinglelist?name=%s", taxonScientificName);
+
+        JSONArray json = get(url);
+        if (json == null || json.length() == 0) {
+            return null;
+        }
+
+        JSONObject res;
+
+        try {
+            res = (JSONObject) json.get(0);
+        } catch (JSONException e) {
+            return null;
+        }
+
+        return res;
     }
 
     private boolean postProjectObservations(Observation observation) throws AuthenticationException, CancelSyncException, SyncFailedException {

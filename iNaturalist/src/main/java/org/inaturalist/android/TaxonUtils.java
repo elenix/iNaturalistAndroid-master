@@ -134,6 +134,27 @@ public class TaxonUtils {
         }
     }
 
+    public static String getTestDNA(JSONObject item) {
+        String displayGenbankId = null;
+
+        String test = item.optString("genbankid", "Nothing");
+        Log.i("TaxonUtils: ", test);
+
+        try {
+            JSONObject genbank = item.getJSONObject("genbankid");
+            JSONArray taxonNames = genbank.getJSONArray("name");
+            JSONObject taxonName = taxonNames.getJSONObject(0);
+            displayGenbankId = taxonName.getString("genbankid");
+        } catch (JSONException e) {
+        }
+
+        if (displayGenbankId == null) {
+            displayGenbankId = "Empty";
+        }
+
+        return displayGenbankId;
+    }
+
     public static String getTaxonName(Context context, JSONObject item) {
         JSONObject defaultName;
         String displayName = null;
