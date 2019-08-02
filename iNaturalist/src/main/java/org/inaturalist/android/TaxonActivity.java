@@ -153,9 +153,9 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private TextView mWikipediaSummary;
     private TextView mConservationStatus;
     private TextView mConservationSource;
+    private TextView mGenbankID;
     private TabLayout mSeasonabilityTabLayout;
     private ViewPager mSeasonabilityViewPager;
-    private TextView mTestDNA;
 
 
     @State
@@ -685,7 +685,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mConservationStatusContainer = (ViewGroup) findViewById(R.id.conservation_status_container);
         mConservationStatus = (TextView) findViewById(R.id.conservation_status);
         mConservationSource = (TextView) findViewById(R.id.conservation_source);
-        mTestDNA = (TextView) findViewById(R.id.test_DNA);
+        mGenbankID = (TextView) findViewById(R.id.genbank_id);
 
         //NCBI XML textview
         mTaxonGenomeCount = findViewById(R.id.genome_count);
@@ -1129,13 +1129,24 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
         // DNA Visualisation
         String genbankId = TaxonUtils.getGenbankId(mTaxon.getJSONObject());
-        Log.i(TAG, genbankId);
-        Picasso.with(getBaseContext())
-                .load("http://mydnamark.org/serverdata/img/dnaVis/" + genbankId + ".gb.png")
-                .resize(1000, 1000)
-                .centerInside()
-                .into(mDNAVis);
-        //mTestDNA.setText(genbankId);
+
+        if(genbankId == "Empty"){
+            Log.i(TAG, genbankId);
+            Picasso.with(getBaseContext())
+                    .load(R.drawable.no_dna)
+                    .into(mDNAVis);
+
+            mGenbankID.setText(genbankId);
+        }
+        else{
+            Log.i(TAG, genbankId);
+            Picasso.with(getBaseContext())
+                    .load("http://mydnamark.org/serverdata/img/dnaVis/" + genbankId + ".gb.png")
+                    .into(mDNAVis);
+
+            mGenbankID.setText(genbankId);
+        }
+
     }
 
     @Override
