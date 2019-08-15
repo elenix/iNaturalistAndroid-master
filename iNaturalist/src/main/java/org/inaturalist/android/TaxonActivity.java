@@ -62,6 +62,7 @@ import com.livefront.bridge.Bridge;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
+import com.zolad.zoominimageview.ZoomInImageViewAttacher;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -1144,9 +1145,9 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
                     .load("http://mydnamark.org/serverdata/img/dnaVis/" + genbankId + ".gb.png")
                     .into(mDNAVis);
 
+            ZoomInImageViewAttacher mIvAttacter = new ZoomInImageViewAttacher(mDNAVis);
             mGenbankID.setText(genbankId);
         }
-
     }
 
     @Override
