@@ -116,6 +116,8 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private URL geneUrl;
     private URL nucleotideUrl;
     private URL proteinUrl;
+    private URL bioprojectUrl;
+    private URL pubmedUrl;
 
 
     private INaturalistApp mApp;
@@ -152,6 +154,8 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
     private TextView mTaxonGeneCount;
     private TextView mTaxonNucleotideCount;
     private TextView mTaxonProteinCount;
+    private TextView mTaxonBioProjectCount;
+    private TextView mTaxonPubMedCount;
     private TextView mWikipediaSummary;
     private TextView mConservationStatus;
     private TextView mConservationSource;
@@ -694,6 +698,8 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         mTaxonGeneCount = findViewById(R.id.gene_count);
         mTaxonNucleotideCount = findViewById(R.id.nucleotide_count);
         mTaxonProteinCount = findViewById(R.id.protein_count);
+        mTaxonBioProjectCount = findViewById(R.id.bio_project_count);
+        mTaxonPubMedCount = findViewById(R.id.pubmed_count);
 
         ViewGroup mViewOnINat = (ViewGroup) findViewById(R.id.view_on_inat);
         mLoadingPhotos = (ProgressBar) findViewById(R.id.loading_photos);
@@ -703,12 +709,13 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
         //Related link button
         ViewGroup mBtnGoogleScholar = (ViewGroup) findViewById(R.id.btn_google_scholar);
-        ViewGroup mBtnBHL = (ViewGroup) findViewById(R.id.btn_biodiversity_heritage_lib);
         ViewGroup mBtnZipcodeZoo = (ViewGroup) findViewById(R.id.btn_zipcode_zoo);
         ViewGroup mBtnWikipedia = (ViewGroup) findViewById(R.id.btn_wikipedia);
         ViewGroup mBtnIucn = (ViewGroup) findViewById(R.id.btn_international_union_conservation_nature);
         ViewGroup mBtnGbif = (ViewGroup) findViewById(R.id.btn_global_biodiversity_information_facility);
         ViewGroup mBtnNcbi = (ViewGroup) findViewById(R.id.btn_national_center_biotechnology_information);
+        ViewGroup mBtnBHL = (ViewGroup) findViewById(R.id.btn_biodiversity_heritage_lib);
+        ViewGroup mBtnPubMed = (ViewGroup) findViewById(R.id.btn_pubmed);
 
         mTaxonicIcon = (ImageView) findViewById(R.id.taxon_iconic_taxon);
         mTaxonInactive = (ViewGroup) findViewById(R.id.taxon_inactive);
@@ -859,6 +866,20 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
                 String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
                 taxonScientificName = taxonScientificName.replace(" ", "+");
                 String referenceUrl = String.format("https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=%s", taxonScientificName);
+
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(referenceUrl));
+                startActivity(i);
+            }
+        });
+
+        /* Set the button listener for reference button - PubMed. */
+        mBtnPubMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
+                taxonScientificName = taxonScientificName.replace(" ", "+");
+                String referenceUrl = String.format("https://www.ncbi.nlm.nih.gov/pubmed/?term=%s", taxonScientificName);
 
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(referenceUrl));
@@ -1147,7 +1168,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
                     .load("http://qesmc.com/serverdata/img/dnaVis/" + genbankId + ".gb.png")
                     .into(mDNAVis);
 
-            ZoomInImageViewAttacher mIvAttacter = new ZoomInImageViewAttacher(mDNAVis);
+            new ZoomInImageViewAttacher(mDNAVis);
             mGenbankID.setText(genbankId);
         }
     }
@@ -1399,6 +1420,8 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         String geneValue = "";
         String nucleotideValue = "";
         String proteinValue = "";
+        String bioprojectValue = "";
+        String pubmedValue = "";
 
         String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
 
@@ -1410,6 +1433,8 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
                 geneUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=gene&term=" + taxonScientificName);
                 nucleotideUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=nucleotide&term=" + taxonScientificName);
                 proteinUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=protein&term=" + taxonScientificName);
+                bioprojectUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=bioproject&term=" + taxonScientificName);
+                pubmedUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=" + taxonScientificName);
                 int eventType;
 
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -1455,6 +1480,7 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
                         if(parser.getName().equals("Count")){
                             nucleotideValue = parser.nextText();
+                            break;
                         }
                     }
 
@@ -1470,6 +1496,39 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
                         if(parser.getName().equals("Count")){
                             proteinValue = parser.nextText();
+                            break;
+                        }
+                    }
+
+                    eventType = parser.next();
+                }
+
+                parser.setInput(bioprojectUrl.openConnection().getInputStream(), "UTF_8");
+                eventType = parser.getEventType();
+
+                while (eventType != XmlPullParser.END_DOCUMENT){
+                    if(eventType == XmlPullParser.START_TAG) {
+                        Log.i("AsyncParseXML", "START_TAG: " + parser.getName());
+
+                        if(parser.getName().equals("Count")){
+                            bioprojectValue = parser.nextText();
+                            break;
+                        }
+                    }
+
+                    eventType = parser.next();
+                }
+
+                parser.setInput(pubmedUrl.openConnection().getInputStream(), "UTF_8");
+                eventType = parser.getEventType();
+
+                while (eventType != XmlPullParser.END_DOCUMENT){
+                    if(eventType == XmlPullParser.START_TAG) {
+                        Log.i("AsyncParseXML", "START_TAG: " + parser.getName());
+
+                        if(parser.getName().equals("Count")){
+                            pubmedValue = parser.nextText();
+                            break;
                         }
                     }
 
@@ -1511,6 +1570,8 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
             mTaxonGeneCount.setText(geneValue);
             mTaxonNucleotideCount.setText(nucleotideValue);
             mTaxonProteinCount.setText(proteinValue);
+            mTaxonBioProjectCount.setText(bioprojectValue);
+            mTaxonPubMedCount.setText(pubmedValue);
 
         }
     }
