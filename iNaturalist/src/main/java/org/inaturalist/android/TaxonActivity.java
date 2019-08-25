@@ -21,6 +21,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -1142,7 +1143,8 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         else{
             Log.i(TAG, genbankId);
             Picasso.with(getBaseContext())
-                    .load("http://mydnamark.org/serverdata/img/dnaVis/" + genbankId + ".gb.png")
+                    //.load("http://mydnamark.org/serverdata/img/dnaVis/" + genbankId + ".gb.png")
+                    .load("http://qesmc.com/serverdata/img/dnaVis/" + genbankId + ".gb.png")
                     .into(mDNAVis);
 
             ZoomInImageViewAttacher mIvAttacter = new ZoomInImageViewAttacher(mDNAVis);
@@ -1393,10 +1395,10 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
 
     public class AsyncParseXML extends AsyncTask {
 
-        String genomeValue;
-        String geneValue;
-        String nucleotideValue;
-        String proteinValue;
+        String genomeValue = "";
+        String geneValue = "";
+        String nucleotideValue = "";
+        String proteinValue = "";
 
         String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
 
@@ -1489,7 +1491,11 @@ public class TaxonActivity extends AppCompatActivity implements TaxonomyAdapter.
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 
-            int result = Integer.parseInt(geneValue);
+            int result = 0;
+
+            if(!TextUtils.isEmpty(geneValue)) {
+                result = Integer.parseInt(geneValue);
+            }
             //int result = 0;
 
             if(result > 0){

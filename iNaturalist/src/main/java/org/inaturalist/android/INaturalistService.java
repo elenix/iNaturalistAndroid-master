@@ -2176,7 +2176,8 @@ public class INaturalistService extends IntentService {
     private JSONObject getDNAVisualisation(BetterJSONObject mTaxon) throws AuthenticationException {
         String taxonScientificName = TaxonUtils.getTaxonScientificName(mTaxon.getJSONObject());
         taxonScientificName = taxonScientificName.replace(" ", "%20");
-        String url = String.format("http://mydnamark.org/serverdata/admin/speciessinglelist?name=%s", taxonScientificName);
+        //String url = String.format("http://mydnamark.org/serverdata/admin/speciessinglelist?name=%s", taxonScientificName);
+        String url = String.format("http://qesmc.com/serverdata/admin/speciessinglelist?name=%s", taxonScientificName);
 
         JSONArray json = get(url);
         if (json == null || json.length() == 0) {
